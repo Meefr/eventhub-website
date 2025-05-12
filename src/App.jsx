@@ -20,6 +20,8 @@ function App() {
    <AuthProvider>
       <Navbar />
       <Routes>
+        
+        <Route path="/" element={<Home />} />
         <Route path="/eventhub-website/" element={<Home />} />
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/congratulations" element={<Congratulations />} />
