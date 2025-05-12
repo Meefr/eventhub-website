@@ -10,7 +10,7 @@ const EventCard = ({ event }) => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
       <div className="relative">
         <img 
-          src={event.image ? `${event.image}` : '/event-placeholder.jpg'} 
+          src={event.image ? `${event.image}` : './event-placeholder.jpg'} 
           alt={event.title}
           className="w-full h-48 object-cover"
         />

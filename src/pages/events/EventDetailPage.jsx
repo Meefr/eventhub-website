@@ -75,7 +75,7 @@ const EventDetailPage = () => {
         <div className="md:flex">
           <div className="md:w-1/2">
             <img 
-              src={event.image ? `/uploads/${event.image}` : '/event-placeholder.jpg'} 
+              src={event.image ? `/uploads/${event.image}` : './event-placeholder.jpg'} 
               alt={event.title}
               className="w-full h-64 md:h-full object-cover"
             />
