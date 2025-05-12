@@ -1,0 +1,53 @@
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+
+const AdminPanel = () => {
+  const { t } = useTranslation();
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="md:w-1/4 lg:w-1/5">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-lg font-semibold">{t('admin.dashboard')}</h2>
+            </div>
+            <nav className="p-2">
+              <Link
+                to="/admin/events"
+                className={`block px-4 py-2 rounded-md mb-1 ${
+                  isActive('/admin/events')
+                    ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('admin.events.title')}
+              </Link>
+              <Link
+                to="/admin/users"
+                className={`block px-4 py-2 rounded-md ${
+                  isActive('/admin/users')
+                    ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('admin.users.title')}
+              </Link>
+            </nav>
+          </div>
+        </div>
+        <div className="md:w-3/4 lg:w-4/5">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminPanel;
