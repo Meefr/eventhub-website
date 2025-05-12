@@ -1,12 +1,15 @@
 {
   "name": "eventhub",
+  "homepage": "https://Meefr.github.io/eventhub-website/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -14,6 +17,7 @@
     "@types/react-dom": "^18.3.7",
     "axios": "^1.1.2",
     "fs": "^0.0.1-security",
+    "gh-pages": "^6.3.0",
     "outline": "^0.1.1",
     "path": "^0.12.7",
     "process": "^0.11.10",
