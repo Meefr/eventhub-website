@@ -15,16 +15,16 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [bookings, setBookings] = useState([]);
-  
+
   // Pagination states
   const [featuredPagination, setFeaturedPagination] = useState({
     page: 1,
-    limit: 6,
+    limit: 3,
     total: 0,
   });
   const [upcomingPagination, setUpcomingPagination] = useState({
     page: 1,
-    limit: 10,
+    limit: 6,
     total: 0,
   });
 
@@ -46,12 +46,15 @@ const Home = () => {
     const fetchFeaturedEvents = async () => {
       try {
         setLoading(true);
-        const featured = await getFeaturedEvents(featuredPagination.page, featuredPagination.limit);
+        const featured = await getFeaturedEvents(
+          featuredPagination.page,
+          featuredPagination.limit
+        );
         setFeaturedEvents(featured.data);
-        setFeaturedPagination(prev => ({
+        setFeaturedPagination((prev) => ({
           ...prev,
           total: featured.total || 0,
-          pagination: featured.pagination || {}
+          pagination: featured.pagination || {},
         }));
       } catch (error) {
         console.error("Error fetching featured events:", error);
@@ -68,12 +71,15 @@ const Home = () => {
     const fetchUpcomingEvents = async () => {
       try {
         setLoading(true);
-        const upcoming = await getUpcomingEvents(upcomingPagination.page, upcomingPagination.limit);
+        const upcoming = await getUpcomingEvents(
+          upcomingPagination.page,
+          upcomingPagination.limit
+        );
         setUpcomingEvents(upcoming.data);
-        setUpcomingPagination(prev => ({
+        setUpcomingPagination((prev) => ({
           ...prev,
           total: upcoming.total || 0,
-          pagination: upcoming.pagination || {}
+          pagination: upcoming.pagination || {},
         }));
       } catch (error) {
         console.error("Error fetching upcoming events:", error);
@@ -94,16 +100,16 @@ const Home = () => {
   };
 
   const handleFeaturedPageChange = (newPage) => {
-    setFeaturedPagination(prev => ({
+    setFeaturedPagination((prev) => ({
       ...prev,
-      page: newPage
+      page: newPage,
     }));
   };
 
   const handleUpcomingPageChange = (newPage) => {
-    setUpcomingPagination(prev => ({
+    setUpcomingPagination((prev) => ({
       ...prev,
-      page: newPage
+      page: newPage,
     }));
   };
 
@@ -116,46 +122,90 @@ const Home = () => {
       {error && (
         <Alert type="error" message={error} onClose={() => setError("")} />
       )}
-
-      <section className="mb-12">
-        <SectionHeader title={t("home.featured_events")} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredEvents.map((event) => (
-            <EventCard 
-              key={event._id} 
-              event={event} 
-              isBooked={checkIfBooked(event._id)}
-            />
-          ))}
+      <section>
+        <div className="flex justify-between items-center mb-4">
+          <SectionHeader title={t("home.upcoming_events")} />
+          {/* {upcomingPagination.total > upcomingPagination.limit && (
+            <div className="flex items-center">
+              <span className="mr-3 text-gray-600">
+                {t("pagination.page")} {upcomingPagination.page} / 
+                {Math.ceil(upcomingPagination.total / upcomingPagination.limit)}
+              </span>
+              <Pagination 
+                currentPage={upcomingPagination.page}
+                totalPages={Math.ceil(upcomingPagination.total / upcomingPagination.limit)}
+                onPageChange={handleUpcomingPageChange}
+              />
+            </div>
+          )} */}
         </div>
-        {featuredPagination.total > featuredPagination.limit && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {upcomingEvents.length > 0 ? (
+            upcomingEvents.map((event) => (
+              <EventCard
+                key={event._id}
+                event={event}
+                isBooked={checkIfBooked(event._id)}
+              />
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-8 text-gray-500">
+              {t("events.no_upcoming_events")}
+            </div>
+          )}
+        </div>
+        {upcomingPagination.total > upcomingPagination.limit && (
           <div className="mt-8 flex justify-center">
-            <Pagination 
-              currentPage={featuredPagination.page}
-              totalPages={Math.ceil(featuredPagination.total / featuredPagination.limit)}
-              onPageChange={handleFeaturedPageChange}
+            <Pagination
+              currentPage={upcomingPagination.page}
+              totalPages={Math.ceil(
+                upcomingPagination.total / upcomingPagination.limit
+              )}
+              onPageChange={handleUpcomingPageChange}
             />
           </div>
         )}
       </section>
-
-      <section>
-        <SectionHeader title={t("home.upcoming_events")} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {upcomingEvents.map((event) => (
-            <EventCard 
-              key={event._id} 
-              event={event} 
-              isBooked={checkIfBooked(event._id)}
-            />
-          ))}
+      <section className="mb-12">
+        <div className="flex justify-between items-center mb-4 mt-8">
+        <SectionHeader title={t("home.featured_events")} />
+          {/* {featuredPagination.total > featuredPagination.limit && (
+            <div className="flex items-center">
+              <span className="mr-3 text-gray-600">
+                {t("pagination.page")} {featuredPagination.page} / 
+                {Math.ceil(featuredPagination.total / featuredPagination.limit)}
+              </span>
+              <Pagination 
+                currentPage={featuredPagination.page}
+                totalPages={Math.ceil(featuredPagination.total / featuredPagination.limit)}
+                onPageChange={handleFeaturedPageChange}
+              />
+            </div>
+          )} */}
         </div>
-        {upcomingPagination.total > upcomingPagination.limit && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredEvents.length > 0 ? (
+            featuredEvents.map((event) => (
+              <EventCard
+                key={event._id}
+                event={event}
+                isBooked={checkIfBooked(event._id)}
+              />
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-8 text-gray-500">
+              {t("events.no_featured_events")}
+            </div>
+          )}
+        </div>
+        {featuredPagination.total > featuredPagination.limit && (
           <div className="mt-8 flex justify-center">
-            <Pagination 
-              currentPage={upcomingPagination.page}
-              totalPages={Math.ceil(upcomingPagination.total / upcomingPagination.limit)}
-              onPageChange={handleUpcomingPageChange}
+            <Pagination
+              currentPage={featuredPagination.page}
+              totalPages={Math.ceil(
+                featuredPagination.total / featuredPagination.limit
+              )}
+              onPageChange={handleFeaturedPageChange}
             />
           </div>
         )}
