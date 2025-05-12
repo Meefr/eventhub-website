@@ -42,44 +42,6 @@ export const updateEvent = async (id, eventData) => {
   }
 };
 
-// export const createEvent = async (eventData) => {
-//   const response = await api.post('/events', eventData);
-//   return response;
-// };
-// export const createEvent = async (eventData) => {
-//   const formData = new FormData();
-
-//   // Append all fields
-//   for (const key in eventData) {
-//     // For tags (array), append each one
-//     if (Array.isArray(eventData[key])) {
-//       eventData[key].forEach((item) => formData.append(key, item));
-//     } else {
-//       formData.append(key, eventData[key]);
-//     }
-//   }
-//   for (let pair of formData.entries()) {
-//     console.log(pair[0] + ": " + pair[1]);
-//   }
-//   const response = await api.post(
-//     "/events",
-//     formData,
-//     {
-//       headers: {
-//         "Content-Type": "multipart/form-data",
-//       },
-//     },
-//     { withCredentials: true }
-//   );
-
-//   return response;
-// };
-
-// export const updateEvent = async (id, eventData) => {
-//   const response = await api.put(`/events/${id}`, eventData);
-//   return response;
-// };
-
 export const deleteEvent = async (id) => {
   const response = await api.delete(`/events/${id}`);
   return response;
@@ -97,14 +59,17 @@ export const uploadEventImage = async (id, imageFile) => {
   return response;
 };
 
-export const getFeaturedEvents = async () => {
-  const response = await api.get("/events/featured");
-
+export const getFeaturedEvents = async (page = 1, limit = 6) => {
+  const response = await api.get("/events/featured", {
+    params: { page, limit }
+  });
   return response.data;
 };
 
-export const getUpcomingEvents = async () => {
-  const response = await api.get("/events/upcoming");
+export const getUpcomingEvents = async (page = 1, limit = 10) => {
+  const response = await api.get("/events/upcoming", {
+    params: { page, limit }
+  });
   return response.data;
 };
 
