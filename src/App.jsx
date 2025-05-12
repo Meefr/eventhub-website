@@ -15,6 +15,7 @@ import AdminRoute from './components/common/AdminRoute';
 import NotFound from './components/common/NotFound';
 import AdminUsersList from './components/admin/AdminUsersList';
 import CategoryForm from './components/CategoryForm';
+import AdminCategoriesList from './components/admin/AdminCategoriesList';
 function App() {
   return (
    <AuthProvider>
@@ -37,6 +38,7 @@ function App() {
               <Route path="events/new" element={<EventForm />} />
               <Route path="events/:id/edit" element={<EventForm />} />
               <Route path="users" element={<AdminUsersList/>} />
+              <Route path="categories" element={<AdminCategoriesList/>} />
               <Route path="categories/create" element={<CategoryForm />} />
             </Route>
           </Route>

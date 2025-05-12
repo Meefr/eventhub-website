@@ -48,7 +48,7 @@ const EventDetails = () => {
       await createBooking({ event: id, ticketCount: 1 });
       setSuccess(t('bookings.success'));
       setTimeout(() => {
-        navigate('/bookings');
+        navigate('/');
       }, 2000);
     } catch (error) {
       console.error('Booking failed:', error);

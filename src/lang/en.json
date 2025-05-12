@@ -10,6 +10,7 @@
         "update": "Update",
         "create": "Create",
         "cancel": "Cancel",
+        "delete": "Delete",
         "save": "Save",
         "loading": "Loading...",
         "error": "Error",
@@ -53,6 +54,7 @@
         "available_tickets": "Available Tickets",
         "category": "Category",
         "book_now": "Book Now",
+        "booked": "Booked",
         "sold_out": "Sold Out",
         "fetch_error": "Error loading event details",
         "not_found": "Event not found"
@@ -89,7 +91,9 @@
         "events": {
             "update_success": "Event updated successfully",
             "create_success": "Event created successfully",
+            "delete_confirm": "Are you sure you want to delete this event?",
             "delete_success": "Event deleted successfully",
+            "delete_error": "Error deleting Event",
             "image_help_text": "Upload an image for the event",
             "event_image": "Event Image",
             "start_time": "Start Time",
@@ -143,6 +147,7 @@
         "delete_success": "Event deleted successfully",
         "delete_error": "Error deleting event",
         "categories": {
+            "title": "Categories",
             "arabic_name": "Arabic Name",
             "english_name": "English Name",
             "default_name": "Default Name",

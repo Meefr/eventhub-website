@@ -39,6 +39,16 @@ const AdminPanel = () => {
               >
                 {t('admin.users.title')}
               </Link>
+               <Link
+                to="/admin/categories"
+                className={`block px-4 py-2 rounded-md ${
+                  isActive('/admin/categories')
+                    ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('admin.categories.title')}
+              </Link>
             </nav>
           </div>
         </div>

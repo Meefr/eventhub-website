@@ -6,7 +6,7 @@ const Table = ({ data = [], columns = [], emptyMessage = 'No data available' }) 
       </div>
     );
   }
-  data = data.data
+  data = data.data? data.data : data;
 
   return (
     <div className="overflow-x-auto">

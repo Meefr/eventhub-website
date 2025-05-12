@@ -5,15 +5,28 @@ import EventCard from '../../components/events/EventCard';
 import SectionHeader from '../../components/common/SectionHeader';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import Alert from '../../components/common/Alert';
+import { getUserBookings } from '../services/bookingService';
 
 const HomePage = () => {
   const { t } = useTranslation();
   const [featuredEvents, setFeaturedEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [bookings, setBookings] = useState([]);
   const [error, setError] = useState('');
-
   useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        setLoading(true);
+        const { data } = await getUserBookings();
+        setBookings(data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+        setError(t('bookings.fetch_error'));
+      } finally {
+        setLoading(false);
+      }
+    }
     const fetchEvents = async () => {
       try {
         setLoading(true);
@@ -30,8 +43,14 @@ const HomePage = () => {
     };
 
     fetchEvents();
+    fetchBookings();
   }, [t]);
-
+  const checkIfBooked = (eventId) => {
+    const bookedEvent = bookings.find(booking => booking.event._id === eventId);
+    console.log("bookedEvent", bookedEvent);
+    
+    return bookedEvent ? true : false;
+  }
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -45,7 +64,7 @@ const HomePage = () => {
         {featuredEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredEvents.map(event => (
-              <EventCard key={event._id} event={event} />
+              <EventCard key={event._id} event={event} isBooked={checkIfBooked(event._id)}/>
             ))}
           </div>
         ) : (
@@ -60,7 +79,7 @@ const HomePage = () => {
         {upcomingEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {upcomingEvents.map(event => (
-              <EventCard key={event._id} event={event} />
+              <EventCard key={event._id} event={event} isBooked={checkIfBooked(event._id)}/>
             ))}
           </div>
         ) : (

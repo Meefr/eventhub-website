@@ -10,6 +10,7 @@
         "update": "تحديث",
         "create": "إنشاء",
         "cancel": "إلغاء",
+        "delete": "حذف",
         "save": "حفظ",
         "loading": "جاري التحميل...",
         "error": "خطأ",
@@ -58,6 +59,7 @@
         "available_tickets": "التذاكر المتاحة",
         "category": "الفئة",
         "book_now": "احجز الآن",
+        "booked": "تم الحجز",
         "sold_out": "نفذت التذاكر",
         "fetch_error": "خطأ في تحميل تفاصيل الفعالية",
         "not_found": "الفعالية غير موجودة"
@@ -89,7 +91,6 @@
         "events": {
             "update_success": "تم تحديث الفعالية بنجاح",
             "create_success": "تم إنشاء الفعالية بنجاح",
-            "delete_success": "تم حذف الفعالية بنجاح",
             "image_help_text": "قم بتحميل صورة للفعالية",
             "event_image": "صورة الفعالية",
             "start_time": "وقت البدء",
@@ -114,7 +115,10 @@
             "available_tickets": "التذاكر المتاحة",
             "price": "السعر",
             "category": "الفئة",
-            "featured": "مميزة"
+            "featured": "مميزة",
+            "delete_confirm": "هل أنت متأكد أنك تريد حذف هذه الفعالية؟",
+            "delete_success": "تم حذف الفعالية بنجاح",
+            "delete_error": "خطأ في حذف الفعالية"
         },
         "users": {
             "title": "المستخدمون",
@@ -143,11 +147,12 @@
         "delete_success": "تم حذف الفعالية بنجاح",
         "delete_error": "خطأ في حذف الفعالية",
         "categories": {
+            "title": "الفئات",
             "arabic_name": "الاسم بالعربية",
             "english_name": "الاسم بالإنجليزية",
             "default_name": "الاسم الافتراضي",
             "add_new_category": "إضافة فئة جديدة",
-            "translations":"الترجمات",
+            "translations": "الترجمات",
             "create_error": "خطأ في إنشاء الفئة"
         }
     },

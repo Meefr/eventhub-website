@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getEvents } from '../../services/eventService';
+import { deleteEvent, getEvents } from '../../services/eventService';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../common/Button';
 import Table from '../common/Table';
@@ -21,7 +21,9 @@ const AdminEventsList = () => {
       try {
         setLoading(true);
         const { data } = await getEvents({ organizer: user.id });
-        setEvents(data);
+        console.log("events",data);
+        
+        setEvents(data.data);
       } catch (error) {
         console.error('Error fetching events:', error);
         setError(t('admin.events.fetch_error'));
@@ -36,7 +38,23 @@ const AdminEventsList = () => {
   const handleCreate = () => {
     navigate('/admin/events/new');
   };
-
+  const handleDelete = async (id) => {
+    if (window.confirm(t('admin.events.delete_confirm'))) {
+      try {
+        setLoading(true);
+        console.log(events);
+        
+        await deleteEvent(id);
+        
+        await setEvents(events.filter(event => event._id !== id));
+      } catch (error) {
+        console.error('Error deleting event:', error);
+        setError(`${t('admin.events.delete_error')} -- ${error.response?.data?.error}`);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
   const handleEdit = (id) => {
     navigate(`/admin/events/${id}/edit`);
   };
@@ -60,6 +78,19 @@ const AdminEventsList = () => {
             onClick={() => handleEdit(id)}
           >
             {t('common.edit')}
+          </Button>
+        </div>
+      )
+    },{
+      header: t('admin.events.actions'),
+      accessor: '_id',
+      render: (id) => (
+        <div className="space-x-2">
+          <Button 
+            size="sm" 
+            onClick={() => handleDelete(id)}
+          >
+            {t('common.delete')}
           </Button>
         </div>
       )
