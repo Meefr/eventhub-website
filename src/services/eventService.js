@@ -90,3 +90,9 @@ export const createCategory = async (categoryData) => {
   const response = await api.post(`/events/categories`, categoryData);
   return response;
 };
+
+export const deleteCategory = async (id) => {
+  console.log("deleteCategory", id);
+  const response = await api.delete(`/events/categories/${id}`);
+  return response;
+}

@@ -1,12 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 
 const EventCard = ({ event, isBooked }) => {
+  const navigate = useNavigate();
+  const handleClick = (id) => {   
+    console.log("EventCard", isBooked);
+     
+    navigate(`/events/${id}`, { state: { isBooked } });
+  };
   const { t } = useTranslation();
-  const eventDate = new Date(event.date).toLocaleDateString();  
+  const eventDate = new Date(event.date).toLocaleDateString();
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+    <div
+      onClick={() => handleClick(event._id)}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
+    >
       <div className="relative">
         <img
           src={event.image ? `${event.image}` : "./event-placeholder.jpg"}
@@ -40,7 +50,7 @@ const EventCard = ({ event, isBooked }) => {
           {
             <Link to={`/events/${event._id}`}>
               <Button disabled={isBooked} size="sm">
-                {isBooked? t("events.booked") : t("events.book_now")}
+                {isBooked ? t("events.booked") : t("events.book_now")}
                 {/* {t("home.book_now")} */}
               </Button>
             </Link>

@@ -1,5 +1,6 @@
 {
     "common": {
+        "add": "إضافة",
         "login": "تسجيل الدخول",
         "register": "تسجيل",
         "logout": "تسجيل الخروج",
@@ -62,7 +63,8 @@
         "booked": "تم الحجز",
         "sold_out": "نفذت التذاكر",
         "fetch_error": "خطأ في تحميل تفاصيل الفعالية",
-        "not_found": "الفعالية غير موجودة"
+        "not_found": "الفعالية غير موجودة",
+        "tags": "العلامات"
     },
     "bookings": {
         "title": "حجوزاتي",
@@ -89,6 +91,8 @@
     "admin": {
         "dashboard": "لوحة التحكم",
         "events": {
+            "tags": "العلامات",
+            "add_tag_placeholder": "إضافة علامة",
             "update_success": "تم تحديث الفعالية بنجاح",
             "create_success": "تم إنشاء الفعالية بنجاح",
             "image_help_text": "قم بتحميل صورة للفعالية",
@@ -148,12 +152,19 @@
         "delete_error": "خطأ في حذف الفعالية",
         "categories": {
             "title": "الفئات",
+            "name": "الاسم",
+            "status": "الحالة",
             "arabic_name": "الاسم بالعربية",
             "english_name": "الاسم بالإنجليزية",
             "default_name": "الاسم الافتراضي",
             "add_new_category": "إضافة فئة جديدة",
             "translations": "الترجمات",
-            "create_error": "خطأ في إنشاء الفئة"
+            "create_error": "خطأ في إنشاء الفئة",
+            "actions": "الإجراءات",
+            "delete_confirm": "هل أنت متأكد أنك تريد حذف هذه الفئة؟",
+            "delete_success": "تم حذف الفئة بنجاح",
+            "delete_error": "خطأ في حذف الفئة",
+            "delete": "حذف"
         }
     },
     "categories": {

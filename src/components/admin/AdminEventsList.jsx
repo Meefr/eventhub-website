@@ -45,7 +45,7 @@ const AdminEventsList = () => {
         console.log(events);
         
         await deleteEvent(id);
-        
+
         await setEvents(events.filter(event => event._id !== id));
       } catch (error) {
         console.error('Error deleting event:', error);
@@ -88,6 +88,7 @@ const AdminEventsList = () => {
         <div className="space-x-2">
           <Button 
             size="sm" 
+            variant="danger"
             onClick={() => handleDelete(id)}
           >
             {t('common.delete')}
