@@ -20,7 +20,7 @@ const EventCard = ({ event, isBooked }) => {
     >
       <div className="relative">
         <img
-          src={event.image ? `${event.image}` : "https://res-console.cloudinary.com/df7pfi9h3/thumbnails/v1/image/upload/v1747155922/ZXZlbnQtcGxhY2Vob2xkZXJfdWRleHBw/drilldown"}
+          src={event.image ? `${event.image}` : "https://res.cloudinary.com/df7pfi9h3/image/upload/v1747155922/event-placeholder_udexpp.jpg"}
           alt={event.title}
           className="w-full h-48 object-cover"
         />
