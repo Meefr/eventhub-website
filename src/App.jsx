@@ -23,7 +23,6 @@ function App() {
       <Routes>
         
         <Route path="/" element={<Home />} />
-        <Route path="/eventhub-website/" element={<Home />} />
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/congratulations" element={<Congratulations />} />
         <Route path="/login" element={<Login />} />
