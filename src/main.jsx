@@ -13,7 +13,7 @@ const root = createRoot(container);
 
 root.render(
   <StrictMode>
-    <HashRouter>
+    <BrowserRouter basename='eventhub-website/'>
       <AuthProvider>
         <ThemeProvider>
           <LanguageProvider>
@@ -21,6 +21,6 @@ root.render(
           </LanguageProvider>
         </ThemeProvider>
       </AuthProvider>
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>
 );

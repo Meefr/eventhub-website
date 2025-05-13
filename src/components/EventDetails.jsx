@@ -40,7 +40,7 @@ const EventDetails = () => {
 
   const handleBookEvent = async () => {
     if (!isAuthenticated) {
-      navigate("/login", { state: { from: `/events/${id}` } });
+      navigate("/eventhub-website/login", { state: { from: `/events/${id}` } });
       return;
     }
 
