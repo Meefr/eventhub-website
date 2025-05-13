@@ -28,7 +28,7 @@ api.interceptors.response.use(
       // Handle unauthorized access
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      // window.location.href = '/eventhub-website/login';
+      window.location.href = '/eventhub-website/login';
     }
     return Promise.reject(error);
   }
