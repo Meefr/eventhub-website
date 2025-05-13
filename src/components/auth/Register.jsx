@@ -50,7 +50,13 @@ const Register = () => {
       navigate('/');
     } catch (error) {
       console.error('Registration failed:', error);
-      setError(error.response?.data?.message || t('auth.registration_error'));
+      let message = error.response?.data?.error || t('auth.registration_error');
+      if(Array.isArray(error.response?.data?.errors)) {
+        message = error.response.data.errors.map(err => err.message).join(', ');
+        console.log('Validation errors:', message);
+        
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }
