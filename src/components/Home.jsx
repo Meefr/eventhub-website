@@ -7,8 +7,10 @@ import LoadingSpinner from "./common/LoadingSpinner";
 import Alert from "./common/Alert";
 import { getUserBookings } from "../services/bookingService";
 import Pagination from "./common/Pagination"; // Assuming you have a Pagination component
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const [featuredEvents, setFeaturedEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -30,6 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchBookings = async () => {
+      if (!isAuthenticated) return;
       try {
         const { data } = await getUserBookings();
         setBookings(data);
@@ -168,7 +171,7 @@ const Home = () => {
       </section>
       <section className="mb-12">
         <div className="flex justify-between items-center mb-4 mt-8">
-        <SectionHeader title={t("home.featured_events")} />
+          <SectionHeader title={t("home.featured_events")} />
           {/* {featuredPagination.total > featuredPagination.limit && (
             <div className="flex items-center">
               <span className="mr-3 text-gray-600">
