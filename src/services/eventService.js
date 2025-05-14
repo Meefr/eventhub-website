@@ -27,9 +27,7 @@ export const createEvent = async (eventData) => {
 
 export const updateEvent = async (id, eventData) => {
   try {
-    console.log(eventData);
     const response = await api.put(`/events/${id}`, eventData, {
-      
       headers: {
         'Content-Type': 'multipart/form-data',
       },

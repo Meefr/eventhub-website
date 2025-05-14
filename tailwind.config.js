@@ -10,6 +10,7 @@ export default {
         light_2: "#F3F4F6",
         tabledark: "#1F2937",
         tablelight: "#DDDDDD",
+        hoverColor: "#F79B72"
       },
     },
   },

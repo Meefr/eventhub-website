@@ -65,7 +65,9 @@
         "fetch_error": "خطأ في تحميل تفاصيل الفعالية",
         "not_found": "الفعالية غير موجودة",
         "tags": "العلامات",
-        "edit_event": "تعديل الفعالية"
+        "edit_event": "تعديل الفعالية",
+        "no_featured_events": "لا توجد فعاليات مميزة",
+        "no_upcoming_events": "لا توجد فعاليات قادمة"
     },
     "bookings": {
         "title": "حجوزاتي",
@@ -166,7 +168,9 @@
             "delete_confirm": "هل أنت متأكد أنك تريد حذف هذه الفئة؟",
             "delete_success": "تم حذف الفئة بنجاح",
             "delete_error": "خطأ في حذف الفئة",
-            "delete": "حذف"
+            "delete": "حذف",
+            "no_categories": "لا توجد فئات",
+            "create_success": "تم إنشاء الفعالية بنجاح"
         }
     },
     "categories": {
