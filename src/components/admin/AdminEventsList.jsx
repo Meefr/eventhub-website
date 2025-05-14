@@ -88,7 +88,7 @@ const AdminEventsList = () => {
         <div className="space-x-2">
           <Button 
             size="sm" 
-            variant="danger"
+            className="bg-red-500 text-white hover:bg-red-600"
             onClick={() => handleDelete(id)}
           >
             {t('common.delete')}

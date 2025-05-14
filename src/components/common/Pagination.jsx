@@ -2,7 +2,7 @@ import React from "react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = [];
-  
+    
   // Create array of page numbers to show
   const getPageNumbers = () => {
     // Always include first and last page
@@ -61,7 +61,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           ) : (
             <button
               onClick={() => onPageChange(page)}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1 rounded text-dark ${
                 currentPage === page
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 hover:bg-gray-300"
@@ -76,7 +76,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`px-3 py-1 rounded ${
+        className={`px-3 py-1 rounded text-dark ${
           currentPage === totalPages
             ? "text-gray-400 cursor-not-allowed"
             : "bg-gray-200 hover:bg-gray-300"

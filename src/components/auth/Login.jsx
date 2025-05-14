@@ -7,6 +7,7 @@ import FormInput from '../common/FormInput';
 import Button from '../common/Button';
 import Alert from '../common/Alert';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const {darkMode} = useTheme();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -46,12 +48,13 @@ const Login = () => {
       setLoading(false);
     }
   };
-
+  console.log("Login darkMode",darkMode);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+    <div className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 `}>
+      <div className={`max-w-md w-full space-y-8 ${darkMode ? 'bg-tabledark text-light':'bg-light text-dark'} p-8 rounded-lg shadow-lg`}>
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+          <h2 className={`mt-6 text-3xl font-extrabold ${darkMode ? 'text-light' : 'text-dark'}`}>
             {t('auth.login_title')}
           </h2>
         </div>

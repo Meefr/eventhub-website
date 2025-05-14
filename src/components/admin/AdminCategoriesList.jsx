@@ -8,14 +8,15 @@ import Table from "../common/Table";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Alert from "../common/Alert";
 import i18n from "../../lang/i18n";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../common/Button";
 
 const AdminCategoriesList = () => {
   const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -68,12 +69,13 @@ const AdminCategoriesList = () => {
       header: t("admin.categories.actions"),
       accessor: "id", // or "_id"
       format: (id) => (
-        <button
+        <Button
           onClick={() => handleDelete(id)}
-          className="text-red-600 hover:underline"
+          type="button"
+          className="bg-red-500 text-white hover:bg-red-600"
         >
           {t("admin.categories.delete")}
-        </button>
+        </Button>
       ),
     },
   ];
@@ -116,12 +118,13 @@ const AdminCategoriesList = () => {
 
       {/* Button to navigate to create category page */}
       <div className="mb-4">
-        <Link
-          to="/admin/categories/create"
-          className="text-blue-500 hover:underline"
+        <Button
+          type="button"
+          className="mt-5"
+          onClick={() => navigate("/admin/categories/create")}
         >
           {t("admin.categories.add_new_category")}
-        </Link>
+        </Button>
       </div>
     </div>
   );

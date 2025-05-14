@@ -14,6 +14,7 @@ import Alert from "./common/Alert";
 import FormInput from "./common/FormInput";
 import FormTextarea from "./common/FormTextarea";
 import FormSelect from "./common/FormSelect";
+import { useTheme } from "../contexts/ThemeContext";
 
 const EventForm = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const EventForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [newTag, setNewTag] = useState("");
-
+  const { darkMode } = useTheme();
   const fileInputRef = useRef(null);
 
   const [event, setEvent] = useState({
@@ -162,47 +163,6 @@ const EventForm = () => {
       tags: prev.tags.filter((_, index) => index !== indexToRemove),
     }));
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setSubmitting(true);
-  //   setError("");
-  //   setSuccess("");
-
-  //   try {
-  //     const formData = new FormData();
-
-  //     // Append all event data
-  //     Object.keys(event).forEach(key => {
-  //       // Skip image as we'll handle it separately
-  //       if (key !== 'image') {
-  //         formData.append(key, event[key]);
-  //       }
-  //     });
-
-  //     // Append image file if exists
-  //     if (imageFile) {
-  //       formData.append('image', imageFile);
-  //     }
-
-  //     let response;
-  //     if (id) {
-  //       response = await updateEvent(id, formData);
-  //       setSuccess(t("admin.events.update_success"));
-  //     } else {
-  //       response = await createEvent(formData);
-  //       setSuccess(t("admin.events.create_success"));
-  //     }
-
-  //     setTimeout(() => {
-  //       navigate("/admin/events");
-  //     }, 1500);
-  //   } catch (error) {
-  //     console.error("Error saving event:", error);
-  //     setError(error.response?.data?.message || t("admin.events.save_error"));
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -288,8 +248,12 @@ const EventForm = () => {
         />
 
         {/* Image Upload Section */}
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <div className={`space-y-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 dark:border-gray-600 ${darkMode?'bg-tabledark text-light':'bg-light text-dark'} p-4`}>
+          <label
+            className={`block text-sm font-medium ${
+              darkMode ? "text-light" : "text-dark"
+            }`}
+          >
             {t("admin.events.event_image")}
           </label>
 
@@ -328,7 +292,11 @@ const EventForm = () => {
               accept="image/jpeg,image/png,image/webp"
               onChange={handleImageChange}
               ref={fileInputRef}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className={`block w-full text-sm  file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold    ${
+                darkMode
+                  ? "file:bg-blue-50 hover:file:bg-blue-100 file:text-blue-500 bg-tabledark text-light"
+                  : "file:bg-tabledark hover:file:bg-dark file:text-light bg-light text-dark"
+              }  ${darkMode ? "text-light bg-dark" : "text-dark"}`}
             />
           </div>
           <p className="mt-1 text-sm text-gray-500">
@@ -383,7 +351,11 @@ const EventForm = () => {
           required
         />
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            className={`block text-sm font-medium ${
+              darkMode ? "text-light" : "text-dark"
+            }`}
+          >
             {t("admin.events.tags")}
           </label>
 
@@ -398,7 +370,9 @@ const EventForm = () => {
                   handleAddTag();
                 }
               }}
-              className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+              className={`${
+                darkMode ? "bg-secondry text-light" : "bg-light text-dark"
+              } flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500  dark:border-gray-600`}
               placeholder={t("admin.events.add_tag_placeholder")}
             />
             <Button type="button" onClick={handleAddTag}>
@@ -451,15 +425,13 @@ const EventForm = () => {
         />
 
         {/* Button to navigate to create category page */}
-        <div className="mb-4">
-          <Link
-            to="/admin/categories/create"
-            className="text-blue-500 hover:underline"
-          >
-            {t("admin.categories.add_new_category")}
-          </Link>
-        </div>
-
+        <Button
+          type="button"
+          className="mt-5"
+          onClick={() => navigate("/admin/categories/create")}
+        >
+          {t("admin.categories.add_new_category")}
+        </Button>
         <div className="flex space-x-4">
           <div className="flex items-center">
             <input
@@ -472,7 +444,9 @@ const EventForm = () => {
             />
             <label
               htmlFor="isFeatured"
-              className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+              className={`ml-2 block text-sm ${
+                darkMode ? "text-light" : "text-dark"
+              }`}
             >
               {t("admin.events.featured")}
             </label>
@@ -489,7 +463,9 @@ const EventForm = () => {
             />
             <label
               htmlFor="isPublished"
-              className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+              className={`ml-2 block text-sm ${
+                darkMode ? "text-light" : "text-dark"
+              }`}
             >
               {t("admin.events.published")}
             </label>
@@ -499,9 +475,9 @@ const EventForm = () => {
         <div className="flex justify-end space-x-3 pt-4">
           <Button
             type="button"
-            variant="secondary"
             onClick={() => navigate("/admin/events")}
             disabled={submitting}
+            className="bg-red-500 text-white hover:bg-red-600"
           >
             {t("common.cancel")}
           </Button>

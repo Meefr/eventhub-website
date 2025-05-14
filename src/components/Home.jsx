@@ -8,6 +8,7 @@ import Alert from "./common/Alert";
 import { getUserBookings } from "../services/bookingService";
 import Pagination from "./common/Pagination"; // Assuming you have a Pagination component
 import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -17,7 +18,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [bookings, setBookings] = useState([]);
-
+  const { darkMode } = useTheme();
   // Pagination states
   const [featuredPagination, setFeaturedPagination] = useState({
     page: 1,
@@ -121,7 +122,11 @@ const Home = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className={`${
+        darkMode ? "bg-dark" : "bg-bg_light"
+      } mx-auto px-4 py-8`}
+    >
       {error && (
         <Alert type="error" message={error} onClose={() => setError("")} />
       )}

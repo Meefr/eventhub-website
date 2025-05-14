@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const SectionHeader = ({ title, subtitle = '', className = '' }) => {
   const { t } = useTranslation();
-  
+  const {darkMode} = useTheme();
   return (
     <div className={`mb-6 ${className}`}>
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <h2 className={`text-2xl font-bold`}>
         {t(title)}
       </h2>
       {subtitle && (
