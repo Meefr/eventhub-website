@@ -137,7 +137,7 @@ const Navbar = () => {
                 <div className="flex items-center space-x-2">
                   <Link
                     to="/profile"
-                    className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-hoverColor "
+                    className={`text-sm font-medium ${darkMode? 'text-light' : 'text-dark'} hover:text-hoverColor `}
                   >
                     {user?.name}
                   </Link>
